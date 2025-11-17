@@ -13,10 +13,8 @@ MonoBehaviour:
   m_Name: MetaXRProjectSettings
   m_EditorClassIdentifier: 
   boolProperties:
-    keys:
-    - Meta.XR.SDK.UsageSettings.UsesProjectSetupTool
-    - Meta.XR.SDK.UsageSettings.UsesBuildingBlocks
-    values: 0101
+    keys: []
+    values: 
   intProperties:
     keys: []
     values: 
