@@ -1,46 +1,123 @@
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PathFinder : MonoBehaviour
 {
-    public Transform startPoint;
-    public Transform endPoint;
-    public List<Transform> waypoints; // Assign in inspector!
-    public LineRenderer lineRenderer; // Assign in inspector!
+    public Transform player;             // Camera/player/hmd transform
+    public Waypoint destinationWaypoint; // Assign your target waypoint
+    public List<Waypoint> waypoints;     // List of all waypoint objects
+    public LineRenderer lineRenderer;
+    public float lineWidth = 0.2f; 
 
-    public void FindRoute()
+    private Vector3 lastPlayerPos;
+    private float minMoveDist = 0.2f; // Only update if moved > 20cm
+
+    void Start()
     {
-        // Simple "closest connection" approach (for grid: use A*)
-        List<Vector3> path = new List<Vector3>();
-        path.Add(startPoint.position);
+        lastPlayerPos = player.position;
+        SetupLineRenderer();
+        DrawGreedyPath();
+    }
 
-        Transform current = startPoint;
-        while (current != endPoint)
+    void Update()
+    {
+        // Only redraw if player moved enough
+        Vector3 flatPlayerPos = new Vector3(player.position.x, 0f, player.position.z);
+        Vector3 flatLastPos = new Vector3(lastPlayerPos.x, 0f, lastPlayerPos.z);
+
+        if (Vector3.Distance(flatPlayerPos, flatLastPos) > minMoveDist)
         {
-            Transform next = null;
+            DrawGreedyPath();
+            lastPlayerPos = player.position;
+        }
+    }
+
+    void DrawGreedyPath()
+    {
+        Waypoint startWaypoint = FindClosestWaypoint(player.position);
+        List<Waypoint> path = GreedyPath(startWaypoint, destinationWaypoint);
+
+        List<Vector3> positions = new List<Vector3>();
+
+        // Start slightly ahead of player at ground level
+        Vector3 groundStart = player.position;
+        groundStart.y = 0f;
+        groundStart += player.forward * 0.5f; // Offset forward for clarity
+        positions.Add(groundStart);
+
+        foreach (Waypoint wp in path)
+        {
+            Vector3 wpPos = wp.transform.position;
+            wpPos.y = 0f; // Flatten to ground
+            positions.Add(wpPos);
+        }
+
+        lineRenderer.positionCount = positions.Count;
+        lineRenderer.SetPositions(positions.ToArray());
+    }
+
+    Waypoint FindClosestWaypoint(Vector3 position)
+    {
+        float minDist = float.MaxValue;
+        Waypoint closest = null;
+        foreach (Waypoint wp in waypoints)
+        {
+            float dist = Vector3.Distance(wp.transform.position, position);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                closest = wp;
+            }
+        }
+        return closest;
+    }
+
+    List<Waypoint> GreedyPath(Waypoint start, Waypoint destination)
+    {
+        List<Waypoint> path = new List<Waypoint>();
+        HashSet<Waypoint> visited = new HashSet<Waypoint>();
+
+        Waypoint current = start;
+        path.Add(current);
+        visited.Add(current);
+
+        int maxSteps = 100;
+
+        while (current != destination && maxSteps > 0)
+        {
+            Waypoint next = null;
             float minDist = float.MaxValue;
 
-            foreach (Transform wp in waypoints)
+            foreach (Waypoint neighbor in current.neighbors)
             {
-                if (wp == current) continue;
-                float d = Vector3.Distance(current.position, wp.position) + Vector3.Distance(wp.position, endPoint.position);
-                if (d < minDist)
+                if (visited.Contains(neighbor)) continue;
+                float dist = Vector3.Distance(neighbor.transform.position, destination.transform.position);
+                if (dist < minDist)
                 {
-                    minDist = d;
-                    next = wp;
+                    minDist = dist;
+                    next = neighbor;
                 }
             }
-            if (next == null) break;
 
-            path.Add(next.position);
+            if (next == null)
+                break;
+
+            path.Add(next);
+            visited.Add(next);
             current = next;
+            maxSteps--;
         }
-        path.Add(endPoint.position);
-
-        // Draw the line
-        lineRenderer.positionCount = path.Count;
-        lineRenderer.SetPositions(path.ToArray());
-        lineRenderer.material.color = Color.red;
-        lineRenderer.widthMultiplier = 0.5f;
+        return path;
     }
+
+    void SetupLineRenderer()
+    {
+        // Set line appearance as needed
+        lineRenderer.startColor = Color.red;
+        lineRenderer.endColor = Color.red;
+        lineRenderer.widthMultiplier = lineWidth;
+        
+
+
+}
 }
