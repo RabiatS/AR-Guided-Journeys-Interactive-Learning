@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class PathFinder : MonoBehaviour
 {
     public Transform player;             // Camera/player/hmd transform
-    public Waypoint destinationWaypoint; // Assign your target waypoint
+    public Waypoint destinationWaypoint; // Assign target waypoint
     public List<Waypoint> waypoints;     // List of all waypoint objects
     public LineRenderer lineRenderer;
     public float lineWidth = 0.2f; 
@@ -21,10 +21,10 @@ public class PathFinder : MonoBehaviour
 
     void Update()
     {
-        // Only redraw if player moved enough
         Vector3 flatPlayerPos = new Vector3(player.position.x, 0f, player.position.z);
         Vector3 flatLastPos = new Vector3(lastPlayerPos.x, 0f, lastPlayerPos.z);
 
+        // If the player has moved more than minMoveDist, update the line
         if (Vector3.Distance(flatPlayerPos, flatLastPos) > minMoveDist)
         {
             DrawGreedyPath();
@@ -32,29 +32,36 @@ public class PathFinder : MonoBehaviour
         }
     }
 
+
     void DrawGreedyPath()
     {
+        // Find current closest waypoint to player/camera
         Waypoint startWaypoint = FindClosestWaypoint(player.position);
+
+        // Get path from current waypoint to destination
         List<Waypoint> path = GreedyPath(startWaypoint, destinationWaypoint);
 
         List<Vector3> positions = new List<Vector3>();
 
-        // Start slightly ahead of player at ground level
+        // Start line from user's current position
         Vector3 groundStart = player.position;
         groundStart.y = 0f;
-        groundStart += player.forward * 0.5f; // Offset forward for clarity
         positions.Add(groundStart);
 
         foreach (Waypoint wp in path)
         {
+            if (wp == null) continue;
             Vector3 wpPos = wp.transform.position;
-            wpPos.y = 0f; // Flatten to ground
+            wpPos.y = 0f;
             positions.Add(wpPos);
         }
 
         lineRenderer.positionCount = positions.Count;
         lineRenderer.SetPositions(positions.ToArray());
     }
+
+
+
 
     Waypoint FindClosestWaypoint(Vector3 position)
     {
@@ -74,6 +81,22 @@ public class PathFinder : MonoBehaviour
 
     List<Waypoint> GreedyPath(Waypoint start, Waypoint destination)
     {
+        if (start == null)
+        {
+            Debug.LogError("Start waypoint is null!");
+            return new List<Waypoint>();
+        }
+        if (destination == null)
+        {
+            Debug.LogError("Destination waypoint is null!");
+            return new List<Waypoint>();
+        }
+        if (start.neighbors == null)
+        {
+            Debug.LogError("Start waypoint.neighbors is null!");
+            return new List<Waypoint>();
+        }
+
         List<Waypoint> path = new List<Waypoint>();
         HashSet<Waypoint> visited = new HashSet<Waypoint>();
 
@@ -85,11 +108,17 @@ public class PathFinder : MonoBehaviour
 
         while (current != destination && maxSteps > 0)
         {
+            if (current.neighbors == null)
+            {
+                Debug.LogError($"Waypoint '{current.name}' has null neighbors!");
+                break;
+            }
             Waypoint next = null;
             float minDist = float.MaxValue;
 
             foreach (Waypoint neighbor in current.neighbors)
             {
+                if (neighbor == null) continue; // Defensive: skip nulls
                 if (visited.Contains(neighbor)) continue;
                 float dist = Vector3.Distance(neighbor.transform.position, destination.transform.position);
                 if (dist < minDist)
@@ -109,6 +138,7 @@ public class PathFinder : MonoBehaviour
         }
         return path;
     }
+
 
     void SetupLineRenderer()
     {
