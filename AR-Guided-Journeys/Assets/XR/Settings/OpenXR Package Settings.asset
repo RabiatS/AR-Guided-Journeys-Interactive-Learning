@@ -206,6 +206,8 @@ MonoBehaviour:
   lateLatchingMode: 0
   lateLatchingDebug: 0
   optimizeMultiviewRenderRegions: 0
+  m_multiviewRenderRegionsOptimizationMode: 0
+  m_hasMigratedMultiviewRenderRegions: 1
   spacewarpMotionVectorTextureFormat: 0
 --- !u!114 &-8304906837425390993
 MonoBehaviour:
@@ -502,7 +504,11 @@ MonoBehaviour:
   m_spacewarpMotionVectorTextureFormat: 0
   m_optimizeBufferDiscards: 0
   m_symmetricProjection: 0
+  m_optimizeMultiviewRenderRegions: 0
+  m_multiviewRenderRegionsOptimizationMode: 0
+  m_hasMigratedMultiviewRenderRegionSetting: 1
   m_foveatedRenderingApi: 0
+  m_useOpenXRPredictedTime: 0
 --- !u!114 &-3416865672112428974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,7 +599,11 @@ MonoBehaviour:
   m_spacewarpMotionVectorTextureFormat: 0
   m_optimizeBufferDiscards: 0
   m_symmetricProjection: 0
+  m_optimizeMultiviewRenderRegions: 0
+  m_multiviewRenderRegionsOptimizationMode: 0
+  m_hasMigratedMultiviewRenderRegionSetting: 1
   m_foveatedRenderingApi: 0
+  m_useOpenXRPredictedTime: 0
 --- !u!114 &-2440981769118008377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -952,6 +962,7 @@ MonoBehaviour:
   targetOpenXRApiVersion: 
   required: 0
   customRuntimeLoaderName: 
+  m_UseRightHandedNDC: 0
 --- !u!114 &3945875754364015929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -987,6 +998,7 @@ MonoBehaviour:
   m_Name: Android
   m_EditorClassIdentifier: 
   features:
+  - {fileID: 3943418195986265149}
   - {fileID: 5412786722438198651}
   - {fileID: -2179235923286188346}
   - {fileID: -3275956831790035420}
@@ -1019,7 +1031,11 @@ MonoBehaviour:
   m_spacewarpMotionVectorTextureFormat: 0
   m_optimizeBufferDiscards: 0
   m_symmetricProjection: 0
+  m_optimizeMultiviewRenderRegions: 0
+  m_multiviewRenderRegionsOptimizationMode: 0
+  m_hasMigratedMultiviewRenderRegionSetting: 1
   m_foveatedRenderingApi: 0
+  m_useOpenXRPredictedTime: 0
 --- !u!114 &4510677454174849290
 MonoBehaviour:
   m_ObjectHideFlags: 0
