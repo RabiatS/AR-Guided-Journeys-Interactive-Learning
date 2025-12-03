@@ -75,5 +75,47 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8128668236925612103, guid: cd063a6f9fd9dd14f8f5de508a6b4f0b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3387611089760995357}
+    - targetCorrespondingSourceObject: {fileID: 8128668236925612103, guid: cd063a6f9fd9dd14f8f5de508a6b4f0b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3473201834388879000}
   m_SourcePrefab: {fileID: -5645937942226959685, guid: cd063a6f9fd9dd14f8f5de508a6b4f0b, type: 3}
+--- !u!1 &7927074508132659121 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8128668236925612103, guid: cd063a6f9fd9dd14f8f5de508a6b4f0b, type: 3}
+  m_PrefabInstance: {fileID: 2219277314749800438}
+  m_PrefabAsset: {fileID: 0}
+--- !u!111 &3387611089760995357
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7927074508132659121}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
+--- !u!114 &3473201834388879000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7927074508132659121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3c5e28875aea104ab3a0ae44e644919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloatingRotatingArrow
+  rotateSpeed: 60
+  floatAmplitude: 0.1
+  floatFrequency: 2
