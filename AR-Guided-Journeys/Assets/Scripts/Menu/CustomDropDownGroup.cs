@@ -18,6 +18,9 @@
  * limitations under the License.
  */
 
+ // ****** This file has been modified from the original package version to show 
+ // ****** the initial title and subtitle in the header when starting.
+
 using System.Linq;
 using TMPro;
 using UnityEngine;
