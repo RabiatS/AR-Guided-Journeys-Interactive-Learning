@@ -1,0 +1,239 @@
+fileFormatVersion: 2
+guid: a72eb5f34d9eb2644ad402f01d303824
+ModelImporter:
+  serializedVersion: 24200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      internalID: 1827226128182048838
+      firstFrame: 0
+      lastFrame: 72
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: Michi_Low(Clone)
+      parentName: 
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Body
+      parentName: Michi_Low(Clone)
+      position: {x: -0, y: -0.003949508, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: AlaSup_Low1
+      parentName: Body
+      position: {x: -0.006274714, y: 0.0038867607, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Wing_Up_I
+      parentName: AlaSup_Low1
+      position: {x: 0.006274714, y: -0.0042715967, z: 0}
+      rotation: {x: 0, y: -0.21643962, z: -0, w: 0.976296}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Wing_Up_I
+      parentName: Wing_Up_I
+      position: {x: -0.005153714, y: 0.002963971, z: -0.000120491975}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Wing_Up_D
+      parentName: AlaSup_Low1
+      position: {x: 0.006274714, y: -0.0042715967, z: 0}
+      rotation: {x: 0, y: 0.21643962, z: -0, w: 0.976296}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Wing_Up_D
+      parentName: Wing_Up_D
+      position: {x: 0.0051537133, y: 0.002963971, z: -0.000120491975}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Wing
+      parentName: Body
+      position: {x: -0.0067473594, y: 0.0020300366, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Wing_Down_I
+      parentName: Wing
+      position: {x: 0.0067473594, y: -0.0024148724, z: 0}
+      rotation: {x: 0, y: -0.21643962, z: -0, w: 0.976296}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Wing_Down_I
+      parentName: Wing_Down_I
+      position: {x: -0.005893848, y: 0.0019947523, z: -0.000118478536}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Wing_Down_D
+      parentName: Wing
+      position: {x: 0.0067473594, y: -0.0024148724, z: 0}
+      rotation: {x: 0, y: 0.21643962, z: -0, w: 0.976296}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Wing_Down_D
+      parentName: Wing_Down_D
+      position: {x: 0.0058938502, y: 0.0019947523, z: -0.00011847973}
+      rotation: {x: -0.048438612, y: 0.29277962, z: 0.01485263, w: 0.9548368}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Shoulder
+      parentName: Body
+      position: {x: -0, y: 0.003949508, z: 0}
+      rotation: {x: -0.11064384, y: -0, z: 0.78123415, w: 0.6143543}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Shoulder_I
+      parentName: Shoulder
+      position: {x: -0.0039374167, y: -0.0030846484, z: 0.00055764447}
+      rotation: {x: 0.25881907, y: -0, z: -0, w: 0.9659259}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Cannon_I
+      parentName: Shoulder_I
+      position: {x: -0.00057929155, y: 0.000011509332, z: 0.0005196543}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Shoulder_D
+      parentName: Shoulder
+      position: {x: 0.0039374167, y: -0.0030846482, z: 0.00055764447}
+      rotation: {x: 0.4493136, y: 0.63745475, z: -0.53406966, w: 0.32640207}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Cannon_D
+      parentName: Shoulder_D
+      position: {x: -0.0039374167, y: 0.0030846482, z: -0.00055764447}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Cannon
+      parentName: Body
+      position: {x: -0, y: 0.003949508, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Head
+      parentName: Body
+      position: {x: -0, y: 0.0030579749, z: 0.00088175654}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Head_Prop
+      parentName: Head
+      position: {x: -0, y: 0.00089153316, z: -0.00088175654}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

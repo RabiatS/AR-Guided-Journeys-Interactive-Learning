@@ -8,11 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/navigation line.unity
     guid: a725d115008f9da49827fad72e4c9823
+  - enabled: 1
+    path: Assets/Scenes/3DScanEnv.unity
+    guid: 68067da11f641cc4dbc6ee3aeb9ff49b
   m_configObjects:
     Niantic.Lightship.AR.LightshipSettings: {fileID: 11400000, guid: 55cb9ac6e4f620746bcb9db22381af9b, type: 2}
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 43dd5a1892753e447a939672b98b3742, type: 2}
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 1bf87dc7225cd524b9704b9ccd86a388, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: bf4c214ef3cf7924db75f14a6fece60d, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
