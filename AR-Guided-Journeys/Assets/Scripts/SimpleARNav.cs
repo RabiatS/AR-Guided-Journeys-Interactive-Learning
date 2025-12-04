@@ -1,3 +1,4 @@
+using Meta.XR.MRUtilityKit;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,7 +7,7 @@ public class SimpleARNav : MonoBehaviour
     public Transform target;
     public LineRenderer line;
     public float floorY = 0f;
-    public float lineHeight = 0.05f; // Raise slightly above floor
+    public float lineHeight = 0.15f;
 
     private NavMeshPath path;
 
@@ -14,7 +15,6 @@ public class SimpleARNav : MonoBehaviour
     {
         path = new NavMeshPath();
 
-        // Configure LineRenderer for VR visibility
         if (line != null)
         {
             line.useWorldSpace = true;
@@ -27,6 +27,24 @@ public class SimpleARNav : MonoBehaviour
 
     void Update()
     {
+        // Keep MRUK room locked to prevent drift
+        // Smoother room stabilization
+
+        // Stabilize ALL rooms so they all work together
+        if (MRUK.Instance != null)
+        {
+            foreach (var room in MRUK.Instance.Rooms)
+            {
+                if (room != null && room.transform.position.magnitude > 0.01f)
+                {
+                    room.transform.position = Vector3.Lerp(room.transform.position, Vector3.zero, 0.1f);
+                    room.transform.rotation = Quaternion.Lerp(room.transform.rotation, Quaternion.identity, 0.1f);
+                }
+            }
+        }
+
+
+        // Rest of navigation code
         if (!line || !target || !Camera.main) return;
 
         var camPos = Camera.main.transform.position;
@@ -39,7 +57,7 @@ public class SimpleARNav : MonoBehaviour
             for (int i = 0; i < path.corners.Length; i++)
             {
                 Vector3 corner = path.corners[i];
-                corner.y = floorY + lineHeight; // Keep all points at same height
+                corner.y = floorY + lineHeight;
                 line.SetPosition(i, corner);
             }
         }
