@@ -2,24 +2,27 @@ using UnityEngine;
 
 public class FloatingRotatingArrow : MonoBehaviour
 {
+    [Header("Rotation")]
+    [Tooltip("Axis to rotate around (local space)")] public Vector3 rotationAxis = Vector3.up;
     public float rotateSpeed = 60f;
+
+    [Header("Floating")]
     public float floatAmplitude = 0.1f;
     public float floatFrequency = 2f;
 
-    private Vector3 startPos;
+    private Vector3 _startLocalPos;
 
     void Start()
     {
-        startPos = transform.localPosition;
+        _startLocalPos = transform.localPosition;
     }
 
     void Update()
     {
-        // rotate
-        transform.Rotate(Vector3.right * rotateSpeed * Time.deltaTime);
+        Vector3 axis = rotationAxis.sqrMagnitude > 0.0001f ? rotationAxis.normalized : Vector3.up;
+        transform.Rotate(axis * rotateSpeed * Time.deltaTime, Space.Self);
 
-        // float
-        float newY = startPos.y + Mathf.Sin(Time.time * floatFrequency) * floatAmplitude;
-        transform.localPosition = new Vector3(startPos.x, newY, startPos.z);
+        float offset = Mathf.Sin(Time.time * floatFrequency) * floatAmplitude;
+        transform.localPosition = _startLocalPos + Vector3.up * offset;
     }
 }
