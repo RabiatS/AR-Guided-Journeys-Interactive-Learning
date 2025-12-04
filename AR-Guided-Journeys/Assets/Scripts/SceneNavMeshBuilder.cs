@@ -17,55 +17,68 @@ public class SceneNavMeshBuilder : MonoBehaviour
 
     void OnSceneLoaded()
     {
-        Debug.Log("=== Scene loaded! Setting up obstacles ===");
+        Debug.Log("=== Scene loaded! Processing active rooms only ===");
 
-        var room = MRUK.Instance.GetCurrentRoom();
-        if (room != null)
+        foreach (var room in MRUK.Instance.Rooms)
         {
-            int obstacleCount = 0;
+            // Skip inactive rooms
+            if (room == null || !room.gameObject.activeInHierarchy) continue;
 
+            Debug.Log($"Processing active room: {room.name}");
+
+            // Rest of your existing code for floor and obstacles...
             foreach (var anchor in room.Anchors)
             {
-                // Only process furniture/walls, NOT floor or ceiling
-                if (anchor.Label == MRUKAnchor.SceneLabels.FLOOR ||
-                    anchor.Label == MRUKAnchor.SceneLabels.CEILING)
+                // Your existing floor and obstacle code stays the same
+                if (anchor.Label == MRUKAnchor.SceneLabels.FLOOR)
                 {
+                    MeshCollider floorCol = anchor.gameObject.GetComponent<MeshCollider>();
+                    if (floorCol == null)
+                    {
+                        floorCol = anchor.gameObject.AddComponent<MeshCollider>();
+                    }
+                    floorCol.convex = false;
                     continue;
                 }
 
-                // Add collider to make it an obstacle
+                if (anchor.Label == MRUKAnchor.SceneLabels.CEILING) continue;
+
                 if (anchor.VolumeBounds.HasValue)
                 {
-                    var col = anchor.gameObject.GetComponent<BoxCollider>();
-                    if (col == null)
+                    foreach (var col in anchor.GetComponents<Collider>())
                     {
-                        col = anchor.gameObject.AddComponent<BoxCollider>();
+                        Destroy(col);
                     }
 
-                    // Make sure it's on a layer NavMesh can see
-                    anchor.gameObject.layer = LayerMask.NameToLayer("Default");
+                    BoxCollider boxCol = anchor.gameObject.AddComponent<BoxCollider>();
+                    Vector3 size = anchor.VolumeBounds.Value.size;
+                    size.y = 2.5f;
+                    boxCol.size = size;
 
-                    obstacleCount++;
-                    Debug.Log($"Added obstacle: {anchor.Label} at {anchor.transform.position}");
+                    Vector3 center = anchor.VolumeBounds.Value.center;
+                    center.y = 1.25f;
+                    boxCol.center = center;
+
+                    anchor.gameObject.layer = LayerMask.NameToLayer("Default");
                 }
             }
-
-            Debug.Log($"=== Total obstacles added: {obstacleCount} ===");
         }
 
         Invoke("BakeNavMesh", 2f);
     }
 
+
+
+
     void BakeNavMesh()
     {
         if (navSurface != null)
         {
-            // Make sure settings are correct
             navSurface.collectObjects = CollectObjects.All;
             navSurface.useGeometry = NavMeshCollectGeometry.PhysicsColliders;
 
             navSurface.BuildNavMesh();
-            Debug.Log("=== NavMesh baked! ===");
+            Debug.Log("=== NavMesh BAKED! ===");
         }
     }
 }
