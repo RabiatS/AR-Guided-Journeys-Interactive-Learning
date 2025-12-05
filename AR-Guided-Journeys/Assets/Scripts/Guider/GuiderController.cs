@@ -58,6 +58,10 @@ public class GuiderController : MonoBehaviour
     [Tooltip("Current destination point that the guider should walk towards.")]
     public Vector3 destinationPosition;
 
+    [Header("Debug")]
+    [Tooltip("Log basic movement info each second to diagnose navigation.")]
+    public bool debugMovement;
+
     Transform RotationRoot => guiderVisualRoot != null ? guiderVisualRoot : transform;
 
     Vector3 _lastUserPosition;
@@ -66,6 +70,7 @@ public class GuiderController : MonoBehaviour
     float _wobbleTime;
     int _completedWobbles;
     Quaternion _wobbleBaseRotation;
+    float _debugTimer;
 
     void Start()
     {
@@ -162,13 +167,8 @@ public class GuiderController : MonoBehaviour
             planarToDest.y = 0f;
             float distanceToDest = planarToDest.magnitude;
 
-            // If user has been idle and close to destination, face the user instead of walking.
+            // 仅在到达半径内才停下面向用户，否则持续向目的地前进
             if (distanceToDest <= arrivalRadius && userTransform != null)
-            {
-                Vector3 toUser = GetFlatDirectionTo(userTransform.position);
-                RotateTowards(toUser);
-            }
-            else if (_idleTimer >= userIdleSeconds && userTransform != null)
             {
                 Vector3 toUser = GetFlatDirectionTo(userTransform.position);
                 RotateTowards(toUser);
@@ -177,6 +177,17 @@ public class GuiderController : MonoBehaviour
             {
                 RotateTowards(toDestination);
                 MoveTowardsDestination();
+            }
+
+            if (debugMovement)
+            {
+                _debugTimer += Time.deltaTime;
+                if (_debugTimer >= 1f)
+                {
+                    _debugTimer = 0f;
+                    float planarDist = Vector3.Distance(new Vector3(transform.position.x, 0f, transform.position.z), new Vector3(destinationPosition.x, 0f, destinationPosition.z));
+                    Debug.Log($"[GuiderController] Moving; dist={planarDist:F2}, destSelected={destinationSelected}, dest={destinationPosition}");
+                }
             }
         }
         else if (userTransform != null)

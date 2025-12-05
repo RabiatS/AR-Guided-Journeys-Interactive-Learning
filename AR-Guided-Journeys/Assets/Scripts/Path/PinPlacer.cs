@@ -20,6 +20,10 @@ public class SceneMeshPinPlacer : MonoBehaviour
     [Header("Path Drawing")]
     public PathlineDrawer pathDrawer;
 
+    [Header("Robot Guider")]
+    [Tooltip("Optional binder that will send the pin position to the robot guider.")]
+    public PinDestinationBinder pinDestinationBinder;
+
     // 如果只允许场景中存在一个 pin，可以缓存它
     private GameObject currentPinInstance;
 
@@ -106,7 +110,19 @@ public class SceneMeshPinPlacer : MonoBehaviour
             // Draw path to the new pin location
             if (pathDrawer != null)
             {
+                Debug.Log($"<color=cyan>[PinPlacer]</color> Calling pathDrawer.DrawPathTo with hitPoint: {hitPoint}");
                 pathDrawer.DrawPathTo(hitPoint);
+            }
+            else
+            {
+                Debug.LogWarning("<color=red>[PinPlacer]</color> pathDrawer reference is missing!");
+            }
+
+            // 推送目的地给机器人 guider
+            if (pinDestinationBinder != null)
+            {
+                // 使用 pin 的 Transform，这样如果以后你让 pin 自己动，guider 也会跟随最新位置
+                pinDestinationBinder.SetPinTransform(currentPinInstance.transform);
             }
         }
     }

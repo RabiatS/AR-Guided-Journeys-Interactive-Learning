@@ -14,9 +14,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/3DScanEnv.unity
     guid: 68067da11f641cc4dbc6ee3aeb9ff49b
-  - enabled: 1
-    path: Assets/_Recovery/0 (4).unity
+  - enabled: 0
+    path: Assets/Scenes/0 (4).unity
     guid: accdafce048439745a6ece1bfbbcc793
+  - enabled: 1
+    path: Assets/_Recovery/0 (7).unity
+    guid: ddad40fa1b4ee884baed37357e875413
   m_configObjects:
     Niantic.Lightship.AR.LightshipSettings: {fileID: 11400000, guid: 55cb9ac6e4f620746bcb9db22381af9b, type: 2}
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 43dd5a1892753e447a939672b98b3742, type: 2}
